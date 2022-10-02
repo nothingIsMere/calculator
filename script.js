@@ -40,7 +40,6 @@ const disp = document.getElementById('display');
 const btns = Array.from(document.querySelectorAll('button'));
 btns.forEach((btn) => {
     btn.addEventListener("click", (e) => {
-        console.log(btn.id);
         switch(btn.id) {
             case '1':
             case '2':
@@ -54,14 +53,20 @@ btns.forEach((btn) => {
             case '0':
             case '.':
                 disp.textContent += btn.id;
+                break;
             case 'plus-minus':
             case 'clear':
+                disp.textContent = '';
+                break;
             case 'del':
+                disp.textContent = disp.textContent.slice(0, disp.textContent.length - 1);
+                break;
             case '+':
             case '-':
             case '*':
             case '/':
             case '=':
+                // do specified operation, display results
         }
     })
 })
