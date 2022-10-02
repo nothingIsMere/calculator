@@ -54,6 +54,13 @@ btns.forEach((btn) => {
                 dispText.textContent += btn.id;
                 break;
             case 'plus-minus':
+                if(dispText.textContent[0] === '-'){
+                    dispText.textContent = dispText.textContent.slice(1, dispText.textContent.length);   
+                }
+                else{
+                    dispText.textContent = '-' + dispText.textContent; 
+                }
+                break;
             case 'clear':
                 dispText.textContent = '';
                 break;
