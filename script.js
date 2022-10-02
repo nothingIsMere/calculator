@@ -35,8 +35,7 @@ function operate(op, a, b) {
     }
 }
 
-const numStrings = [`1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `0`,];
-const disp = document.getElementById('display');
+const dispText = document.getElementById('display-text');
 const btns = Array.from(document.querySelectorAll('button'));
 btns.forEach((btn) => {
     btn.addEventListener("click", (e) => {
@@ -52,14 +51,14 @@ btns.forEach((btn) => {
             case '9':
             case '0':
             case '.':
-                disp.textContent += btn.id;
+                dispText.textContent += btn.id;
                 break;
             case 'plus-minus':
             case 'clear':
-                disp.textContent = '';
+                dispText.textContent = '';
                 break;
             case 'del':
-                disp.textContent = disp.textContent.slice(0, disp.textContent.length - 1);
+                dispText.textContent = dispText.textContent.slice(0, dispText.textContent.length - 1);
                 break;
             case '+':
             case '-':

@@ -1,7 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&family=Orbitron&display=swap');
+
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    font-family: 'Orbitron', sans-serif;
 }
 
 body {
@@ -29,10 +32,19 @@ body {
 
 #display {
     border: 1px solid black;
-    height: 22%;
+    /* height: 22%; */
+    height: 100px;
     width: 90%;
     margin-top: 15px;
     background: #f4f4f4;
+    display: flex;
+    font-size: 5rem;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+
+#display #display-text {
+    padding-right: 15px;
 }
 
 #key-container {
