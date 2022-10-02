@@ -50,8 +50,15 @@ btns.forEach((btn) => {
             case '8':
             case '9':
             case '0':
-            case '.':
                 dispText.textContent += btn.id;
+                break;
+            case '.':
+                if(dispText.textContent.includes('.')){   // Can't have more than one decimal point in an expression
+                    return;
+                }
+                else{
+                    dispText.textContent += btn.id;   
+                }
                 break;
             case 'plus-minus':
                 if(dispText.textContent[0] === '-'){
