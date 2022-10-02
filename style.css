@@ -65,6 +65,10 @@ body {
     border-radius: 5%;
 }
 
+#key-container .key-row button:hover {
+    background: #969696;
+}
+
 #key-container .key-row #clear {
     flex: 2;
 }

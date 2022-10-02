@@ -35,7 +35,37 @@ function operate(op, a, b) {
     }
 }
 
-console.log(operate(`/`, 3, 0));
+const numStrings = [`1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `0`,];
+const disp = document.getElementById('display');
+const btns = Array.from(document.querySelectorAll('button'));
+btns.forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+        console.log(btn.id);
+        switch(btn.id) {
+            case '1':
+            case '2':
+            case '3':
+            case '4':
+            case '5':
+            case '6':
+            case '7':
+            case '8':
+            case '9':
+            case '0':
+            case '.':
+                disp.textContent += btn.id;
+            case 'plus-minus':
+            case 'clear':
+            case 'del':
+            case '+':
+            case '-':
+            case '*':
+            case '/':
+            case '=':
+        }
+    })
+})
+
 
 
 
