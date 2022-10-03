@@ -38,13 +38,14 @@ body {
     margin-top: 15px;
     background: #f4f4f4;
     display: flex;
-    font-size: 5rem;
+    font-size: 4rem;
     align-items: flex-end;
     justify-content: flex-end;
 }
 
 #display #display-text {
     padding-right: 15px;
+    max-width: 100%;
 }
 
 #key-container {

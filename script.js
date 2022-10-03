@@ -35,6 +35,12 @@ function operate(op, a, b) {
     }
 }
 
+let values = {
+    operator: '' ,
+    firstNum: '',
+    secondNum: '' ,
+};
+
 const dispText = document.getElementById('display-text');
 const btns = Array.from(document.querySelectorAll('button'));
 btns.forEach((btn) => {
@@ -75,9 +81,17 @@ btns.forEach((btn) => {
                 dispText.textContent = dispText.textContent.slice(0, dispText.textContent.length - 1);
                 break;
             case '+':
+                values.operator = '+';
+                
             case '-':
+                values.operator = '-';
+                
             case '*':
+                values.operator = '*';
+                
             case '/':
+                values.operator = '/';
+                
             case '=':
                 // do specified operation, display results
         }
