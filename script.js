@@ -36,15 +36,16 @@ function operate(op, a, b) {
 }
 
 let values = {
-    operator: '' ,
-    firstNum: '',
-    secondNum: '' ,
+    operation: '' , 
+    num1: 0,
+    num2: 0,
 };
 
+let currentStr = ''; 
 const dispText = document.getElementById('display-text');
 const btns = Array.from(document.querySelectorAll('button'));
 btns.forEach((btn) => {
-    btn.addEventListener("click", (e) => {
+    btn.addEventListener("click", (e) => {  
         switch(btn.id) {
             case '1':
             case '2':
@@ -56,7 +57,9 @@ btns.forEach((btn) => {
             case '8':
             case '9':
             case '0':
-                dispText.textContent += btn.id;
+                currentStr += btn.id;
+                dispText.textContent = currentStr;
+                console.log(values);
                 break;
             case '.':
                 if(dispText.textContent.includes('.')){   // Can't have more than one decimal point in an expression
@@ -75,25 +78,42 @@ btns.forEach((btn) => {
                 }
                 break;
             case 'clear':
-                dispText.textContent = '';
+                currentStr = '';
+                dispText.textContent = currentStr;
+                values = {
+                    operation: '' , 
+                    num1: 0,
+                    num2: 0,
+                };
                 break;
             case 'del':
                 dispText.textContent = dispText.textContent.slice(0, dispText.textContent.length - 1);
                 break;
             case '+':
-                values.operator = '+';
-                
+                values.num1 = parseInt(dispText.textContent);
+                values.operation = '+';
+                currentStr = '';
+                console.log(values);
+                break;
             case '-':
-                values.operator = '-';
-                
+                values.num1 = parseInt(dispText.textContent);
+                values.operation = '-';
+                break;
             case '*':
-                values.operator = '*';
-                
+                values.num1 = parseInt(dispText.textContent);
+                values.operation = '*';
+                break;
             case '/':
-                values.operator = '/';
-                
+                values.num1 = parseInt(dispText.textContent);
+                values.operation = '/';
+                break;
             case '=':
-                // do specified operation, display results
+                values.num2 = parseInt(dispText.textContent);
+                values.num1 = operate(values.operation, values.num1, values.num2); 
+                dispText.textContent = values.num1;
+                console.log(values);
+                break;
+                
         }
     })
 })
