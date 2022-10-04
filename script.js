@@ -90,25 +90,25 @@ btns.forEach((btn) => {
                 dispText.textContent = dispText.textContent.slice(0, dispText.textContent.length - 1);
                 break;
             case '+':
-                values.num1 = parseInt(dispText.textContent);
+                values.num1 = parseInt(currentStr);
                 values.operation = '+';
                 currentStr = '';
                 console.log(values);
                 break;
             case '-':
-                values.num1 = parseInt(dispText.textContent);
+                values.num1 = parseInt(currentStr);
                 values.operation = '-';
                 break;
             case '*':
-                values.num1 = parseInt(dispText.textContent);
+                values.num1 = parseInt(currentStr);
                 values.operation = '*';
                 break;
             case '/':
-                values.num1 = parseInt(dispText.textContent);
+                values.num1 = parseInt(currentStr);
                 values.operation = '/';
                 break;
             case '=':
-                values.num2 = parseInt(dispText.textContent);
+                values.num2 = parseInt(currentStr);
                 values.num1 = operate(values.operation, values.num1, values.num2); 
                 dispText.textContent = values.num1;
                 console.log(values);
