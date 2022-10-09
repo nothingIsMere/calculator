@@ -60,10 +60,12 @@ let values = {
 let firstOperation = true;
 let operatorPressed = false; 
 
-let str1 = '3.2';
-let str2 = '2';
-console.log(Number(str1)*Number(str2));
-console.log(values);
+window.addEventListener("keydown", (e) => { 
+    if(e.key === "Backspace"){
+        currentStr = currentStr.slice(0, dispText.textContent.length - 1); 
+        dispText.textContent = currentStr;
+    }
+})
 
 let currentStr = ''; 
 const dispText = document.getElementById('display-text');
@@ -96,13 +98,21 @@ btns.forEach((btn) => {
                 dispText.textContent = currentStr;
                 break;
             case 'plus-minus':
-                if(currentStr[0] === '-'){
-                    currentStr = currentStr.slice(1, currentStr.length);   
+                console.log(operatorPressed);
+                if(operatorPressed){
+                    currentStr = `-`;
+                    dispText.textContent = currentStr;
+                    operatorPressed = false;
+                }else{
+                    if(currentStr[0] === '-'){
+                        currentStr = currentStr.slice(1, currentStr.length);   
+                    }
+                    else{
+                        currentStr = '-' + currentStr; 
+                    }
+                    dispText.textContent = currentStr;
                 }
-                else{
-                    currentStr = '-' + currentStr; 
-                }
-                dispText.textContent = currentStr;
+                
                 break;
             case 'clear':
                 currentStr = '';
@@ -113,9 +123,11 @@ btns.forEach((btn) => {
                     num2: 0,
                 };
                 firstOperation = true;
+                operatorPressed = false;
                 break;
             case 'del':
-                dispText.textContent = dispText.textContent.slice(0, dispText.textContent.length - 1);
+                currentStr = currentStr.slice(0, dispText.textContent.length - 1); 
+                dispText.textContent = currentStr;
                 break;
             case '+':                              //maybe make all this into a function once it's working?
                 if(firstOperation){
