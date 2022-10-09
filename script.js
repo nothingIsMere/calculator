@@ -1,23 +1,39 @@
 // Basic arithmetic functions
 function add(a,b) {
-    return (a + b).toFixed(2);
+    if(!Number.isInteger(a + b)){
+        return (a + b).toFixed(2);
+    }else{
+        return (a + b);
+    }
+   
 }
 
 function subtract(a,b) {
-    return (a - b).toFixed(2);
+    if(!Number.isInteger(a - b)){
+        return (a - b).toFixed(2);
+    }else{
+        return (a - b);
+    }
 }
 
 function multiply(a,b) {
-    return (a*b).toFixed(2);
+    if(!Number.isInteger(a*b)){
+        return (a*b).toFixed(2);
+    }else{
+        return (a*b);
+    }
 }
 
 function divide(a,b) {
     if(b === 0){
-        console.log("No. Just no.");
-        return;
+        return ('Nope');
     }
     else{
-        return (a/b).toFixed(2);   
+        if(!Number.isInteger(a/b)){
+            return (a/b).toFixed(2);
+        }else{
+            return (a/b);
+        } 
     }
 }
 
@@ -25,13 +41,13 @@ function divide(a,b) {
 function operate(op, a, b) {
     switch(op){
         case `+`:
-            return(add(a,b));
+            return add(Number(a),Number(b));
         case `-`:
-            return(subtract(a,b));
+            return subtract(Number(a),Number(b));
         case `*`:
-            return(multiply(a,b));
+            return multiply(Number(a),Number(b));
         case `/`:
-            return(divide(a,b));
+            return divide(Number(a),Number(b));
     }
 }
 
@@ -40,6 +56,14 @@ let values = {
     num1: 0,
     num2: 0,
 };
+
+let firstOperation = true;
+let operatorPressed = false; 
+
+let str1 = '3.2';
+let str2 = '2';
+console.log(Number(str1)*Number(str2));
+console.log(values);
 
 let currentStr = ''; 
 const dispText = document.getElementById('display-text');
@@ -57,25 +81,28 @@ btns.forEach((btn) => {
             case '8':
             case '9':
             case '0':
+                operatorPressed = false;
                 currentStr += btn.id;
                 dispText.textContent = currentStr;
                 console.log(values);
                 break;
             case '.':
-                if(dispText.textContent.includes('.')){   // Can't have more than one decimal point in an expression
+                if(currentStr.includes('.')){   // Can't have more than one decimal point in an expression
                     return;
                 }
                 else{
-                    dispText.textContent += btn.id;   
+                    currentStr += btn.id;   
                 }
+                dispText.textContent = currentStr;
                 break;
             case 'plus-minus':
-                if(dispText.textContent[0] === '-'){
-                    dispText.textContent = dispText.textContent.slice(1, dispText.textContent.length);   
+                if(currentStr[0] === '-'){
+                    currentStr = currentStr.slice(1, currentStr.length);   
                 }
                 else{
-                    dispText.textContent = '-' + dispText.textContent; 
+                    currentStr = '-' + currentStr; 
                 }
+                dispText.textContent = currentStr;
                 break;
             case 'clear':
                 currentStr = '';
@@ -85,38 +112,126 @@ btns.forEach((btn) => {
                     num1: 0,
                     num2: 0,
                 };
+                firstOperation = true;
                 break;
             case 'del':
                 dispText.textContent = dispText.textContent.slice(0, dispText.textContent.length - 1);
                 break;
-            case '+':
-                values.num1 = parseInt(currentStr);
-                values.operation = '+';
-                currentStr = '';
-                console.log(values);
+            case '+':                              //maybe make all this into a function once it's working?
+                if(firstOperation){
+                    operatorPressed = true;
+                    values.num1 = currentStr;
+                    values.operation = e.target.textContent;
+                    currentStr = '';
+                    firstOperation = false;
+                    console.log(values);
+                }else{
+                    if(operatorPressed === true){
+                        values.num2 = values.num1;
+                        values.operation = e.target.textContent;
+                        values.num1 = operate(values.operation, values.num1, values.num2);
+                        dispText.textContent = values.num1;
+                        currentStr = '';
+                        console.log(values);
+                    }else {
+                        operatorPressed = true;
+                    values.num2 = currentStr;
+                    values.num1 = operate(values.operation, values.num1, values.num2);
+                    dispText.textContent = values.num1;
+                    values.operation = e.target.textContent;
+                    currentStr = '';
+                    console.log(values);
+                    }
+                }
                 break;
             case '-':
-                values.num1 = parseInt(currentStr);
-                values.operation = '-';
+                if(firstOperation){
+                    operatorPressed = true;
+                    values.num1 = currentStr;
+                    values.operation = e.target.textContent;
+                    currentStr = '';
+                    firstOperation = false;
+                    console.log(values);
+                }else{
+                    if(operatorPressed === true){
+                        values.num2 = values.num1;
+                        values.operation = e.target.textContent;
+                        values.num1 = operate(values.operation, values.num1, values.num2);
+                        dispText.textContent = values.num1;
+                        currentStr = '';
+                        console.log(values);
+                    }else {
+                        operatorPressed = true;
+                        values.num2 = currentStr;
+                        values.num1 = operate(values.operation, values.num1, values.num2);
+                        dispText.textContent = values.num1;
+                        values.operation = e.target.textContent;
+                        currentStr = '';
+                        console.log(values);
+                    }
+                }
                 break;
             case '*':
-                values.num1 = parseInt(currentStr);
-                values.operation = '*';
+                if(firstOperation){
+                    operatorPressed = true;
+                    values.num1 = currentStr;
+                    values.operation = e.target.textContent;
+                    currentStr = '';
+                    firstOperation = false;
+                    console.log(values);
+                }else{
+                    if(operatorPressed === true){
+                        values.num2 = values.num1;
+                        values.operation = e.target.textContent;
+                        values.num1 = operate(values.operation, values.num1, values.num2);
+                        dispText.textContent = values.num1;
+                        currentStr = '';
+                        console.log(values);
+                    }else {
+                        operatorPressed = true;
+                        values.num2 = currentStr;
+                        values.num1 = operate(values.operation, values.num1, values.num2);
+                        dispText.textContent = values.num1;
+                        values.operation = e.target.textContent;
+                        currentStr = '';
+                        console.log(values);
+                    }
+                }
                 break;
             case '/':
-                values.num1 = parseInt(currentStr);
-                values.operation = '/';
+                if(firstOperation){
+                    operatorPressed = true;
+                    values.num1 = currentStr;
+                    values.operation = e.target.textContent;
+                    currentStr = '';
+                    firstOperation = false;
+                    console.log(values);
+                }else{
+                    if(operatorPressed === true){
+                        values.num2 = values.num1;
+                        values.operation = e.target.textContent;
+                        values.num1 = operate(values.operation, values.num1, values.num2);
+                        dispText.textContent = values.num1;
+                        currentStr = '';
+                        console.log(values);
+                    }else {
+                        operatorPressed = true;
+                        values.num2 = currentStr;
+                        values.num1 = operate(values.operation, values.num1, values.num2);
+                        dispText.textContent = values.num1;
+                        values.operation = e.target.textContent;
+                        currentStr = '';
+                        console.log(values);
+                    }
+                }
                 break;
             case '=':
-                values.num2 = parseInt(currentStr);
-                values.num1 = operate(values.operation, values.num1, values.num2); 
-                dispText.textContent = values.num1;
-                console.log(values);
                 break;
                 
         }
     })
 })
+
 
 
 
