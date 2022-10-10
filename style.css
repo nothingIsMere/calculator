@@ -1,10 +1,5 @@
 /* @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&family=Orbitron&display=swap'); */
 @font-face {
-    font-family: 'calculator';
-    src: url('./digital-7.ttf');
-}
-
-@font-face {
     font-family: 'telegrama';
     src: url('./telegrama_render.otf');
 }
@@ -48,7 +43,6 @@ body {
     margin-top: 15px;
     background: #f4f4f4;
     display: flex;
-    font-size: 2rem;
     align-items: flex-end;
     justify-content: flex-end;
 }
@@ -58,7 +52,7 @@ body {
     max-width: 100%;
     max-height: 100%;
     /* padding-bottom: 5px; */
-    font-size: 5rem;
+    font-size: 4.2rem;
 }
 
 #key-container {
