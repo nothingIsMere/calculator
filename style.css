@@ -41,6 +41,7 @@ body {
     font-size: 4rem;
     align-items: flex-end;
     justify-content: flex-end;
+    padding-bottom: 3px;
 }
 
 #display #display-text {

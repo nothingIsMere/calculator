@@ -58,7 +58,8 @@ let values = {
 };
 
 let firstOperation = true;
-let operatorPressed = false; 
+let operatorPressed = false;
+let equalsPressed = false; 
 
 window.addEventListener("keydown", (e) => { 
     if(e.key === "Backspace"){
@@ -137,6 +138,11 @@ btns.forEach((btn) => {
                     currentStr = '';
                     firstOperation = false;
                     console.log(values);
+                }else if(equalsPressed){
+                    operatorPressed = true;
+                    equalsPressed = false;
+                    values.operation = e.target.textContent;
+                    currentStr = '';
                 }else{
                     if(operatorPressed === true){
                         values.num2 = values.num1;
@@ -147,12 +153,12 @@ btns.forEach((btn) => {
                         console.log(values);
                     }else {
                         operatorPressed = true;
-                    values.num2 = currentStr;
-                    values.num1 = operate(values.operation, values.num1, values.num2);
-                    dispText.textContent = values.num1;
-                    values.operation = e.target.textContent;
-                    currentStr = '';
-                    console.log(values);
+                        values.num2 = currentStr;
+                        values.num1 = operate(values.operation, values.num1, values.num2);
+                        dispText.textContent = values.num1;
+                        values.operation = e.target.textContent;
+                        currentStr = '';
+                        console.log(values);
                     }
                 }
                 break;
@@ -164,6 +170,11 @@ btns.forEach((btn) => {
                     currentStr = '';
                     firstOperation = false;
                     console.log(values);
+                }else if(equalsPressed){
+                    operatorPressed = true;
+                    equalsPressed = false;
+                    values.operation = e.target.textContent;
+                    currentStr = '';
                 }else{
                     if(operatorPressed === true){
                         values.num2 = values.num1;
@@ -191,6 +202,11 @@ btns.forEach((btn) => {
                     currentStr = '';
                     firstOperation = false;
                     console.log(values);
+                }else if(equalsPressed){
+                    operatorPressed = true;
+                    equalsPressed = false;
+                    values.operation = e.target.textContent;
+                    currentStr = '';
                 }else{
                     if(operatorPressed === true){
                         values.num2 = values.num1;
@@ -218,6 +234,11 @@ btns.forEach((btn) => {
                     currentStr = '';
                     firstOperation = false;
                     console.log(values);
+                }else if(equalsPressed){
+                    operatorPressed = true;
+                    equalsPressed = false;
+                    values.operation = e.target.textContent;
+                    currentStr = '';
                 }else{
                     if(operatorPressed === true){
                         values.num2 = values.num1;
@@ -238,6 +259,12 @@ btns.forEach((btn) => {
                 }
                 break;
             case '=':
+                equalsPressed = true;
+                values.num2 = currentStr;
+                values.num1 = operate(values.operation, values.num1, values.num2);
+                dispText.textContent = values.num1;
+                // currentStr = '';
+                console.log(values);
                 break;
                 
         }
