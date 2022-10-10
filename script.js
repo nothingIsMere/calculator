@@ -59,7 +59,7 @@ let values = {
 
 let firstOperation = true;
 let operatorPressed = false;
-let equalsPressed = false; 
+let equalsPressed = false;
 
 window.addEventListener("keydown", (e) => { 
     if(e.key === "Backspace"){
