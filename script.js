@@ -63,6 +63,40 @@ function operate(op, a, b) {
     }
 }
 
+function operatorClick(str) {
+    if(firstOperation){
+        operatorPressed = true;
+        values.num1 = currentStr;
+        values.operation = str;
+        currentStr = '';
+        firstOperation = false;
+
+    }else if(equalsPressed){
+        operatorPressed = true;
+        equalsPressed = false;
+        values.operation = str;
+        currentStr = '';
+    }else{
+        if(operatorPressed === true){
+            values.num2 = values.num1;
+            values.operation = str;
+            values.num1 = operate(values.operation, values.num1, values.num2);
+            dispText.textContent = values.num1;
+            currentStr = '';
+
+        }else {
+            operatorPressed = true;
+            values.num2 = currentStr;
+            values.num1 = operate(values.operation, values.num1, values.num2);
+            dispText.textContent = values.num1;
+            values.operation = str;
+            currentStr = '';
+
+        }
+    }
+    return;
+}
+
 let values = {
     operation: '' , 
     num1: 0,
@@ -142,140 +176,32 @@ btns.forEach((btn) => {
                 operatorPressed = false;
                 break;
             case 'del':
-                if(equalsPressed){
-                    currentStr = '0';
+                if(equalsPressed || operatorPressed){
+                    currentStr = '';
+                    dispText.textContent = currentStr;
+                    values = {
+                        operation: '' , 
+                        num1: 0,
+                        num2: 0,
+                    };
+                firstOperation = true;
+                operatorPressed = false;
                 }else{
                     currentStr = currentStr.slice(0, dispText.textContent.length - 1); 
                 }
                 dispText.textContent = currentStr;
                 break;
-            case '+':                              //maybe make all this into a function once it's working?
-                if(firstOperation){
-                    operatorPressed = true;
-                    values.num1 = currentStr;
-                    values.operation = e.target.textContent;
-                    currentStr = '';
-                    firstOperation = false;
-
-                }else if(equalsPressed){
-                    operatorPressed = true;
-                    equalsPressed = false;
-                    values.operation = e.target.textContent;
-                    currentStr = '';
-                }else{
-                    if(operatorPressed === true){
-                        values.num2 = values.num1;
-                        values.operation = e.target.textContent;
-                        values.num1 = operate(values.operation, values.num1, values.num2);
-                        dispText.textContent = values.num1;
-                        currentStr = '';
-    
-                    }else {
-                        operatorPressed = true;
-                        values.num2 = currentStr;
-                        values.num1 = operate(values.operation, values.num1, values.num2);
-                        dispText.textContent = values.num1;
-                        values.operation = e.target.textContent;
-                        currentStr = '';
-    
-                    }
-                }
+            case '+':                              
+                operatorClick(e.target.textContent);
                 break;
             case '-':
-                if(firstOperation){
-                    operatorPressed = true;
-                    values.num1 = currentStr;
-                    values.operation = e.target.textContent;
-                    currentStr = '';
-                    firstOperation = false;
-
-                }else if(equalsPressed){
-                    operatorPressed = true;
-                    equalsPressed = false;
-                    values.operation = e.target.textContent;
-                    currentStr = '';
-                }else{
-                    if(operatorPressed === true){
-                        values.num2 = values.num1;
-                        values.operation = e.target.textContent;
-                        values.num1 = operate(values.operation, values.num1, values.num2);
-                        dispText.textContent = values.num1;
-                        currentStr = '';
-    
-                    }else {
-                        operatorPressed = true;
-                        values.num2 = currentStr;
-                        values.num1 = operate(values.operation, values.num1, values.num2);
-                        dispText.textContent = values.num1;
-                        values.operation = e.target.textContent;
-                        currentStr = '';
-    
-                    }
-                }
+                operatorClick(e.target.textContent);
                 break;
             case '*':
-                if(firstOperation){
-                    operatorPressed = true;
-                    values.num1 = currentStr;
-                    values.operation = e.target.textContent;
-                    currentStr = '';
-                    firstOperation = false;
-
-                }else if(equalsPressed){
-                    operatorPressed = true;
-                    equalsPressed = false;
-                    values.operation = e.target.textContent;
-                    currentStr = '';
-                }else{
-                    if(operatorPressed === true){
-                        values.num2 = values.num1;
-                        values.operation = e.target.textContent;
-                        values.num1 = operate(values.operation, values.num1, values.num2);
-                        dispText.textContent = values.num1;
-                        currentStr = '';
-    
-                    }else {
-                        operatorPressed = true;
-                        values.num2 = currentStr;
-                        values.num1 = operate(values.operation, values.num1, values.num2);
-                        dispText.textContent = values.num1;
-                        values.operation = e.target.textContent;
-                        currentStr = '';
-    
-                    }
-                }
+                operatorClick(e.target.textContent);
                 break;
             case '/':
-                if(firstOperation){
-                    operatorPressed = true;
-                    values.num1 = currentStr;
-                    values.operation = e.target.textContent;
-                    currentStr = '';
-                    firstOperation = false;
-
-                }else if(equalsPressed){
-                    operatorPressed = true;
-                    equalsPressed = false;
-                    values.operation = e.target.textContent;
-                    currentStr = '';
-                }else{
-                    if(operatorPressed === true){
-                        values.num2 = values.num1;
-                        values.operation = e.target.textContent;
-                        values.num1 = operate(values.operation, values.num1, values.num2);
-                        dispText.textContent = values.num1;
-                        currentStr = '';
-    
-                    }else {
-                        operatorPressed = true;
-                        values.num2 = currentStr;
-                        values.num1 = operate(values.operation, values.num1, values.num2);
-                        dispText.textContent = values.num1;
-                        values.operation = e.target.textContent;
-                        currentStr = '';
-    
-                    }
-                }
+                operatorClick(e.target.textContent);
                 break;
             case '=':
                 equalsPressed = true;
