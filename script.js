@@ -1,41 +1,53 @@
 // Basic arithmetic functions
 function add(a,b) {
-    if(!Number.isInteger(a + b)){
-        return (a + b).toFixed(2);
+    if((a + b) > 9999999){
+        return (a + b).toExponential(1);
     }else{
-        return (a + b);
+        if(!Number.isInteger(a + b)){
+            return (a + b).toFixed(2);
+        }else{
+            return (a + b);
+        }
     }
-   
 }
 
 function subtract(a,b) {
-    if(!Number.isInteger(a - b)){
-        return (a - b).toFixed(2);
+    if((a - b) > 9999999){
+        return (a - b).toExponential(1);
     }else{
-        return (a - b);
+        if(!Number.isInteger(a - b)){
+            return (a - b).toFixed(2);
+        }else{
+            return (a - b);
+        }
     }
 }
 
 function multiply(a,b) {
-    if(!Number.isInteger(a*b)){
-        return (a*b).toFixed(2);
+    if((a*b) > 9999999){
+        return (a*b).toExponential(1);
     }else{
-        return (a*b);
+        if(!Number.isInteger(a*b)){
+            return (a*b).toFixed(2);
+        }else{
+            return (a*b);
+        }
     }
 }
 
 function divide(a,b) {
     if(b === 0){
         return ('Nope');
-    }
-    else{
+    }else if((a/b) > 9999999){
+        return (a/b).toExponential(1);
+    }else {
         if(!Number.isInteger(a/b)){
             return (a/b).toFixed(2);
         }else{
             return (a/b);
         } 
     }
-}
+ }
 
 // Operate function
 function operate(op, a, b) {
@@ -84,10 +96,14 @@ btns.forEach((btn) => {
             case '8':
             case '9':
             case '0':
-                operatorPressed = false;
-                currentStr += btn.id;
-                dispText.textContent = currentStr;
-                console.log(values);
+                if(currentStr.length < 7){
+                    operatorPressed = false;
+                    currentStr += btn.id;
+                    dispText.textContent = currentStr;
+                    console.log(values);
+                }else{
+                    return;
+                }
                 break;
             case '.':
                 if(currentStr.includes('.')){   // Can't have more than one decimal point in an expression
@@ -99,7 +115,6 @@ btns.forEach((btn) => {
                 dispText.textContent = currentStr;
                 break;
             case 'plus-minus':
-                console.log(operatorPressed);
                 if(operatorPressed){
                     currentStr = `-`;
                     dispText.textContent = currentStr;
@@ -127,7 +142,11 @@ btns.forEach((btn) => {
                 operatorPressed = false;
                 break;
             case 'del':
-                currentStr = currentStr.slice(0, dispText.textContent.length - 1); 
+                if(equalsPressed){
+                    currentStr = '0';
+                }else{
+                    currentStr = currentStr.slice(0, dispText.textContent.length - 1); 
+                }
                 dispText.textContent = currentStr;
                 break;
             case '+':                              //maybe make all this into a function once it's working?
@@ -137,7 +156,7 @@ btns.forEach((btn) => {
                     values.operation = e.target.textContent;
                     currentStr = '';
                     firstOperation = false;
-                    console.log(values);
+
                 }else if(equalsPressed){
                     operatorPressed = true;
                     equalsPressed = false;
@@ -150,7 +169,7 @@ btns.forEach((btn) => {
                         values.num1 = operate(values.operation, values.num1, values.num2);
                         dispText.textContent = values.num1;
                         currentStr = '';
-                        console.log(values);
+    
                     }else {
                         operatorPressed = true;
                         values.num2 = currentStr;
@@ -158,7 +177,7 @@ btns.forEach((btn) => {
                         dispText.textContent = values.num1;
                         values.operation = e.target.textContent;
                         currentStr = '';
-                        console.log(values);
+    
                     }
                 }
                 break;
@@ -169,7 +188,7 @@ btns.forEach((btn) => {
                     values.operation = e.target.textContent;
                     currentStr = '';
                     firstOperation = false;
-                    console.log(values);
+
                 }else if(equalsPressed){
                     operatorPressed = true;
                     equalsPressed = false;
@@ -182,7 +201,7 @@ btns.forEach((btn) => {
                         values.num1 = operate(values.operation, values.num1, values.num2);
                         dispText.textContent = values.num1;
                         currentStr = '';
-                        console.log(values);
+    
                     }else {
                         operatorPressed = true;
                         values.num2 = currentStr;
@@ -190,7 +209,7 @@ btns.forEach((btn) => {
                         dispText.textContent = values.num1;
                         values.operation = e.target.textContent;
                         currentStr = '';
-                        console.log(values);
+    
                     }
                 }
                 break;
@@ -201,7 +220,7 @@ btns.forEach((btn) => {
                     values.operation = e.target.textContent;
                     currentStr = '';
                     firstOperation = false;
-                    console.log(values);
+
                 }else if(equalsPressed){
                     operatorPressed = true;
                     equalsPressed = false;
@@ -214,7 +233,7 @@ btns.forEach((btn) => {
                         values.num1 = operate(values.operation, values.num1, values.num2);
                         dispText.textContent = values.num1;
                         currentStr = '';
-                        console.log(values);
+    
                     }else {
                         operatorPressed = true;
                         values.num2 = currentStr;
@@ -222,7 +241,7 @@ btns.forEach((btn) => {
                         dispText.textContent = values.num1;
                         values.operation = e.target.textContent;
                         currentStr = '';
-                        console.log(values);
+    
                     }
                 }
                 break;
@@ -233,7 +252,7 @@ btns.forEach((btn) => {
                     values.operation = e.target.textContent;
                     currentStr = '';
                     firstOperation = false;
-                    console.log(values);
+
                 }else if(equalsPressed){
                     operatorPressed = true;
                     equalsPressed = false;
@@ -246,7 +265,7 @@ btns.forEach((btn) => {
                         values.num1 = operate(values.operation, values.num1, values.num2);
                         dispText.textContent = values.num1;
                         currentStr = '';
-                        console.log(values);
+    
                     }else {
                         operatorPressed = true;
                         values.num2 = currentStr;
@@ -254,7 +273,7 @@ btns.forEach((btn) => {
                         dispText.textContent = values.num1;
                         values.operation = e.target.textContent;
                         currentStr = '';
-                        console.log(values);
+    
                     }
                 }
                 break;
@@ -264,7 +283,6 @@ btns.forEach((btn) => {
                 values.num1 = operate(values.operation, values.num1, values.num2);
                 dispText.textContent = values.num1;
                 // currentStr = '';
-                console.log(values);
                 break;
                 
         }
