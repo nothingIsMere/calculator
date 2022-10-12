@@ -134,7 +134,6 @@ btns.forEach((btn) => {
                     operatorPressed = false;
                     currentStr += btn.id;
                     dispText.textContent = currentStr;
-                    console.log(values);
                 }else{
                     return;
                 }
@@ -208,7 +207,6 @@ btns.forEach((btn) => {
                 values.num2 = currentStr;
                 values.num1 = operate(values.operation, values.num1, values.num2);
                 dispText.textContent = values.num1;
-                // currentStr = '';
                 break;
                 
         }
